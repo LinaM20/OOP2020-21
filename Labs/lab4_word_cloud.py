@@ -30,7 +30,7 @@ class WordCloud:
             <div style="text-align: center; vertical-align: middle; font-family: arial; color: white; background-color:black; border:1px solid black">')
 
         # your code goes here!
-        fo.write('<span style="font-size: 20px"> HELLO </span>')
+        fo.write('<span style="font-size: 20px"> Hello </span>')
 
         fo.write('</div>\
             </body>\
@@ -38,11 +38,23 @@ class WordCloud:
 
         fo.close()
 
-
     # opens the input file gettisburg.txt
+    f = open("gettisburg.txt", "r")
+    print(f.read())
+    f.close()
+
     # remember to open in in the correct mode
     # reads the file line by line
+    f = open("gettisburg.txt", "r")
+    for line in f:
+        word = line.split()
+        print(word)
+    f.close()
     # creates the dictionary containing the word itself
+    my_dict = {
+    }
+
+    
     # and how often it occurs in a sentence
     # makes a call to add_to_dict where the dictionary
     # is actually populated
@@ -51,7 +63,20 @@ class WordCloud:
         my_dict = {}
         # your code goes here:
 
-        return my_dict
+        with open("gettisburg.txt", "r") as file:
+            for line in file:
+
+                for word in line.split():
+                    if word in my_dict:
+                        my_dict[word] = my_dict[word]
+                    else:
+                        my_dict[word] = 1
+
+                        self.add_to_dict(word, my_dict)
+
+                        print(my_dict)
+
+
 
     # helper function that is called from
     # create_dict
@@ -60,10 +85,21 @@ class WordCloud:
     # if this word already exists. Otherwise sets the
     # word occurance counter to 1
     # returns a dictionary
-    def add_to_dict(self, word, the_dict):
+    def add_to_dict(self, word_in_line, the_dict):
         # your code goes here
 
-        return the_dict
+        i = 0
+
+        for word_in_dict in the_dict:
+
+            if i != len(the_dict) - 1:
+
+                if word_in_line == word_in_dict:
+                    the_dict[word_in_dict] = the_dict[word_in_dict] +1
+
+                    i = i + 1
+
+                    return the_dict
 
 
 wc = WordCloud()
