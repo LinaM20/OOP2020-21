@@ -46,7 +46,7 @@ class CardGame():
 
         # add elements into the frames
         self.open_card = Button(cards_frame)
-        the_card = PhotoImage(file='cards/queen_hearts.gif')
+        the_card = PhotoImage(file='cards/'+ self.the_cards.get() +'.gif')
         self.open_card.config(image=the_card)
         self.open_card.grid(row=0, column=0, padx=2, pady=2)
         self.open_card.photo = the_card
@@ -80,14 +80,24 @@ class CardGame():
     def load_cards(self):
         cards = Queue(maxsize=52) #change this if you want to use a different data structure
         suits = ("hearts", "diamonds", "spades", "clubs")
-        people = ("queen", "jack", "king")
+        peoples = ("queen", "jack", "king")
         card_list = []
 
-        # your code goes here:
+        values = ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10')
+        for suit in suits:
+            for value in values:
+                card_list.append(value + "_" + suit)
+            for people in peoples:
+                card_list.append(people + "_" + suit)
+
+
 
         shuffle(card_list)
 
-        # your code goes here:
+        for i in range(0, 52):
+            cards.put(card_list[i])
+
+        print(cards.qsize())
 
         return cards
 
@@ -96,7 +106,7 @@ class CardGame():
     # updates the display
     # updates the score
     def pick_card(self):
-        pass  # replace this line by your code
+        pass
 
     # contains the logic to compare if the score
     # is smaller, greater or equal to 21
